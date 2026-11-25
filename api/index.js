@@ -523,7 +523,7 @@ app.get('/api/reports', requireLogin, async (req, res) => {
 });
 
 // USER MANAGEMENT AND ACTIVITY LOG: Owner only.
-app.get('/api/users', requireOwner, async (req, res) => {
+app.get('/api/users', requireLogin, requireOwner, async (req, res) => {
     const [users] = await db.execute('SELECT id, full_name, email, role, created_at FROM users ORDER BY id');
     const [logs] = await db.execute('SELECT activity_logs.activity, activity_logs.created_at, users.full_name FROM activity_logs LEFT JOIN users ON activity_logs.user_id=users.id ORDER BY activity_logs.id DESC LIMIT 50');
     res.json({ users, logs });
