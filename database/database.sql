@@ -1,5 +1,3 @@
--- Select/create your hosted database in your database provider before running this script.
-
 CREATE TABLE IF NOT EXISTS users (
     id INT AUTO_INCREMENT PRIMARY KEY,
     full_name VARCHAR(120) NOT NULL,
