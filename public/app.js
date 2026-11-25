@@ -156,6 +156,7 @@ async function loadReport() {
 }
 
 async function loadUsers() {
+    if (currentUser.role !== 'Owner') return; // Exit early
     const data = await api('/api/users');
     $('userRows').innerHTML = data.users.length ? data.users.map((user) => `
         <tr><td><strong>${safe(user.full_name)}</strong></td><td>${safe(user.email)}</td><td><span class="status ${user.role === 'Owner' ? 'good' : 'warn'}">${safe(user.role)}</span></td><td>${new Date(user.created_at).toLocaleDateString()}</td></tr>`).join('') : '<tr><td colspan="4" class="empty-row">No users found.</td></tr>';
