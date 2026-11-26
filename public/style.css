@@ -1,10 +1,10 @@
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Lora:wght@600;700&display=swap');
 
 :root {
-  --navy: #1f3d2b;      
-  --navy2: #2f5d3a;     
-  --blue: #3a7a3c;      
-  --bg: #f6f1e4;        
+  --navy: #1f3d2b;
+  --navy2: #2f5d3a;
+  --blue: #3a7a3c;
+  --bg: #f6f1e4;
   --text: #2b2a26;
   --muted: #7a7566;
   --line: #e6dec9;
@@ -12,9 +12,9 @@
   --green: #2f7a45;
   --red: #a63a3a;
   --orange: #b07a2a;
-  --wood: #c89b5e;     
-  --maroon: #6b2a2a;   
-  --card: #fffdf8;      
+  --wood: #c89b5e;
+  --maroon: #6b2a2a;
+  --card: #fffdf8;
   --shadow: 0 8px 24px rgba(60, 45, 20, 0.07);
 }
 
@@ -60,6 +60,7 @@ button {
   color: var(--blue);
 }
 
+/* ---------- Login / Register ---------- */
 .auth-page {
   min-height: 100vh;
   display: grid;
@@ -68,12 +69,13 @@ button {
 }
 
 .auth-side {
+  position: relative;
   background:
     linear-gradient(rgba(20, 45, 30, 0.86), rgba(31, 61, 43, 0.94)),
     url('images/cover.jpg') center / cover,
     #1f3d2b;
   color: #fff;
-  padding: 10vh 9%;
+  padding: 10vh 8%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -99,6 +101,26 @@ button {
   height: 100%;
   object-fit: contain;
   border-radius: inherit;
+}
+
+/* Logo centered at the top of the green login panel */
+.auth-side .brand-mark {
+  position: absolute;
+  top: 40px;
+  left: 50%;
+  transform: translateX(-50%);
+  height: 120px;
+  width: 120px;
+  margin: 0;
+  border-radius: 50%;
+  background: #eeeeee;
+}
+
+.auth-side .eyebrow {
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 14px;
+  color: #c9d8b6;
 }
 
 .auth-side h1 {
@@ -263,11 +285,11 @@ button {
 }
 
 .small-mark {
-  height: 38px;
-  width: 38px;
-  border-radius: 11px;
+  height: 48px;
+  width: 48px;
+  border-radius: 50%;
   margin: 0;
-  background: #f3ead2;
+  background: #eeeeee;
   color: var(--navy);
   font-size: 13px;
 }
@@ -330,24 +352,6 @@ button {
 
 .sidebar-bottom {
   margin-top: auto;
-}
-
-.help-box {
-  background: #2a4d36;
-  border-radius: 10px;
-  padding: 14px;
-  margin: 0 2px 18px;
-}
-
-.help-box strong {
-  font-size: 12px;
-}
-
-.help-box p {
-  font-size: 11px;
-  color: #c9d2bd;
-  line-height: 1.5;
-  margin: 7px 0 0;
 }
 
 .logout-button {
@@ -690,9 +694,11 @@ tbody tr:last-child td {
 
 .footer-note {
   text-align: center;
-  color: #a39d8b;
-  font-size: 10px;
-  padding: 15px;
+  font-family: 'Lora', Georgia, serif;
+  color: #6b6450;
+  font-size: 12px;
+  line-height: 1.7;
+  padding: 22px 15px;
 }
 
 .global-message {
@@ -739,13 +745,40 @@ tbody tr:last-child td {
     grid-template-columns: 1fr;
   }
 
+  /* Compact branded header on phones (logo + title only) */
   .auth-side {
+    display: flex;
+    align-items: center;
+    text-align: center;
+    padding: 28px 24px;
+  }
+
+  .auth-side .brand-mark {
+    position: static;
+    transform: none;
+    height: 72px;
+    width: 72px;
+    margin: 0 0 14px;
+  }
+
+  .auth-side .eyebrow {
+    margin-bottom: 8px;
+  }
+
+  .auth-side h1 {
+    font-size: 22px;
+    margin: 0;
+    text-align: center;
+  }
+
+  .auth-side > p:not(.eyebrow),
+  .auth-points {
     display: none;
   }
 
   .auth-content {
-    min-height: 100vh;
-    padding: 25px;
+    min-height: auto;
+    padding: 28px 24px;
   }
 
   .sidebar {
@@ -759,9 +792,18 @@ tbody tr:last-child td {
     padding: 0 5px 12px;
   }
 
-  .nav-heading,
-  .sidebar-bottom {
+  .nav-heading {
     display: none;
+  }
+
+  /* Keep Sign out visible on phones */
+  .sidebar-bottom {
+    display: block;
+    margin-top: 8px;
+  }
+
+  .logout-button {
+    padding: 10px;
   }
 
   .side-nav {
@@ -846,7 +888,6 @@ tbody tr:last-child td {
 
 }
 
-/* ---------- Vegetable inventory alerts ---------- */
 .veg-alerts {
   display: grid;
   gap: 8px;
