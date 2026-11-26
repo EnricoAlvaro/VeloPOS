@@ -30,6 +30,14 @@ const db = mysql.createPool({
     ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: true } : undefined
 });
 
+// Use Philippine time (UTC+8) for every database connection
+db.on('connection', (connection) => {
+    connection.query("SET time_zone = '+08:00'");
+});
+
+// Today's date (YYYY-MM-DD) in UTC+8
+const todayLocal = () => new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
+
 app.set('trust proxy', 1);
 app.use(express.json({ limit: '1mb' }));
 app.use(express.urlencoded({ extended: true }));
@@ -415,7 +423,7 @@ app.post('/api/vegetables/use', requireLogin, async (req, res) => {
                 [vegetableId, batch.id, used, reason, notes || null, req.user.id]);
             // When a partially used batch is opened/cut, keep the remainder and apply its shorter expiry date.
             if (openedExpiryDate && newBalance > 0 && used > 0) {
-                if (openedExpiryDate < new Date().toISOString().slice(0, 10) || openedExpiryDate > String(batch.expiry_date).slice(0, 10)) {
+                if (openedExpiryDate < todayLocal() || openedExpiryDate > String(batch.expiry_date).slice(0, 10)) {
                     throw new Error('Opened expiry date must be today or later and cannot be later than the original expiry date.');
                 }
                 await connection.execute(
@@ -445,7 +453,7 @@ app.post('/api/vegetables/batches/:id/open', requireLogin, async (req, res) => {
         const [rows] = await db.execute('SELECT * FROM vegetable_batches WHERE id = ? AND quantity_remaining > 0', [req.params.id]);
         if (!rows.length) return res.status(404).json({ message: 'Active batch not found.' });
         const batch = rows[0];
-        if (openedExpiryDate < new Date().toISOString().slice(0, 10) || openedExpiryDate > String(batch.expiry_date).slice(0, 10)) {
+        if (openedExpiryDate < todayLocal() || openedExpiryDate > String(batch.expiry_date).slice(0, 10)) {
             return res.status(400).json({ message: 'New expiry must be today or later and cannot be later than the original expiry.' });
         }
         await db.execute('UPDATE vegetable_batches SET is_opened=1, opened_at=COALESCE(opened_at, NOW()), expiry_date=? WHERE id=?', [openedExpiryDate, req.params.id]);
