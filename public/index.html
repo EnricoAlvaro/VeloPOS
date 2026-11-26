@@ -61,6 +61,8 @@
                     <article class="stat-card"><div class="stat-icon green">₱</div><p>Sales today</p><h3 id="salesToday">₱0.00</h3><span class="stat-foot">Today's recorded sales</span></article>
                     <article class="stat-card"><div class="stat-icon blue">▤</div><p>Inventory items</p><h3 id="inventoryCount">0</h3><span class="stat-foot">Different stock items</span></article>
                     <article class="stat-card"><div class="stat-icon orange">!</div><p>Low stock alerts</p><h3 id="lowStockCount">0</h3><span class="stat-foot">Items needing attention</span></article>
+                
+            <div id="salesCharts"></div>
                 </div>
                 <div class="content-card"><div class="card-heading"><div><h3>Recent activity</h3><p class="muted">Latest actions recorded in the system</p></div></div><ul id="activityList" class="activity-list"><li>No activity yet.</li></ul></div>
             </section>
@@ -78,7 +80,7 @@
                         <div class="form-actions"><button class="primary-button" type="submit" id="reservationSubmit">Add reservation</button><button class="light-button hidden" type="button" id="cancelReservationEdit">Cancel edit</button></div>
                     </form>
                 </div>
-                <div class="content-card"><div class="card-heading"><div><h3>Booking records</h3><p class="muted">All current and cancelled bookings</p></div><input id="reservationSearch" class="search-input" placeholder="Search customer..."></div><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Date & time</th><th>Guests</th><th>Deposit</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead><tbody id="reservationRows"></tbody></table></div></div>
+                     <div id="bookingCalendar"></div> <div class="content-card"><div class="card-heading"><div><h3>Booking records</h3><p class="muted">All current and cancelled bookings</p></div><input id="reservationSearch" class="search-input" placeholder="Search customer..."></div><div class="table-wrap"><table><thead><tr><th>Customer</th><th>Date & time</th><th>Guests</th><th>Deposit</th><th>Payment</th><th>Status</th><th>Actions</th></tr></thead><tbody id="reservationRows"></tbody></table></div></div>
             </section>
 
             <section id="sales" class="page hidden">
@@ -175,6 +177,8 @@
             </footer>
         </main>
     </div>
+    
     <script src="app.js"></script>
+    <script src="widgets.js"></script> 
 </body>
 </html>
