@@ -436,9 +436,7 @@ button {
 
 .welcome-row h2,
 .section-intro h2 {
-  font: 700 20px 'Lora', Georgia, serif;
-  color: var(--navy);
-  margin: 0;
+  display: none;
 }
 
 .today-label {
