@@ -1,9 +1,20 @@
 const ITEM_CATEGORIES = {
-  'burger': 'Food',
-  'pasta': 'Food',
-  'salad': 'Food',
   'empanada': 'Snacks'
 };
+
+const CATEGORY_WORDS = {
+  Snacks: ['fries', 'nachos', 'chips', 'empanada', 'cake', 'cookie', 'bread', 'donut', 'siomai', 'lumpia', 'turon'],
+  Food: ['burger', 'pasta', 'salad', 'rice', 'chicken', 'pork', 'beef', 'fish', 'sisig', 'adobo', 'silog', 'tapsilog', 'pizza', 'sandwich', 'noodle', 'pancit', 'spaghetti', 'soup', 'meal'],
+  Drinks: ['coffee', 'latte', 'americano', 'cappuccino', 'mocha', 'espresso', 'tea', 'juice', 'shake', 'smoothie', 'frappe', 'soda', 'coke', 'sprite', 'water', 'milk', 'chocolate']
+};
+
+function categoryOf(name) {
+  const item = String(name).trim().toLowerCase();
+  if (ITEM_CATEGORIES[item]) return ITEM_CATEGORIES[item];
+  const found = Object.entries(CATEGORY_WORDS).find(([, words]) =>
+    words.some(word => new RegExp(`\\b${word}(s|es)?\\b`).test(item)));
+  return found ? found[0] : 'Other';
+}
 
 (function () {
   const css = `
@@ -108,7 +119,7 @@ const ITEM_CATEGORIES = {
     try {
       const [sales, bookings] = await Promise.all([get('/api/sales'), get('/api/reservations')]);
       renderSalesCharts(document.getElementById('salesCharts'),
-        sales.map(s => ({ date: s.created_at.replace(' ', 'T'), category: ITEM_CATEGORIES[s.item_name.trim().toLowerCase()] || 'Other', total: s.total_amount })));
+        sales.map(s => ({ date: s.created_at.replace(' ', 'T'), category: categoryOf(s.item_name), total: s.total_amount })));
       const cal = document.getElementById('bookingCalendar');
       renderCalendar(cal,
         bookings.map(b => ({ date: String(b.booking_date).slice(0, 10), payment: b.payment_status, status: b.status })),
