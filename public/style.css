@@ -106,7 +106,7 @@ button {
 /* Logo centered at the top of the green login panel */
 .auth-side .brand-mark {
   position: absolute;
-  top: 70px;
+  top: 90px;
   left: 50%;
   transform: translateX(-50%);
   height: 120px;
