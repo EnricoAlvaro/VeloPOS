@@ -54,7 +54,7 @@ const ITEM_CATEGORIES = {
 
     el.innerHTML = `<div class="vw-row">
       <div class="vw-card"><h3>Weekly Sales</h3><div class="vw-bars">${days.map((d, i) =>
-        `<div class="vw-col" title="${peso(totals[i])}"><div class="vw-bar" style="height:${totals[i] / max * 85}%"></div>${d.toLocaleDateString('en-US', { weekday: 'short' })}</div>`).join('')}</div></div>
+        `<div class="vw-col" title="${peso(totals[i])}"><b>${totals[i] ? peso(totals[i]) : ''}</b><div class="vw-bar" style="height:${totals[i] / max * 75}%"></div>${d.toLocaleDateString('en-US', { weekday: 'short' })}</div>`).join('')}</div></div>
       <div class="vw-card"><h3>Sales by Category (this week)</h3>${Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([name, v], i) => {
         const pct = sum ? Math.round(v / sum * 100) : 0;
         return `<div class="vw-cat"><span class="vw-name">${esc(name)}</span><div class="vw-track"><div class="vw-fill" style="width:${pct}%;background:linear-gradient(90deg,${colors[i % 5]})">${pct}%</div></div><span class="vw-right">${peso(v)}</span></div>`;
