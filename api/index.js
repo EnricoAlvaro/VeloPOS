@@ -1,5 +1,3 @@
-// Vercel serverless API for the Integrated Reservation, Sales, and Inventory System.
-// The same app is also used by server.js for local development.
 require('dotenv').config();
 require('express-async-errors');
 
@@ -30,12 +28,10 @@ const db = mysql.createPool({
     ssl: process.env.DB_SSL === 'true' ? { rejectUnauthorized: true } : undefined
 });
 
-// Use Philippine time (UTC+8) for every database connection
 db.on('connection', (connection) => {
     connection.query("SET time_zone = '+08:00'");
 });
 
-// Today's date (YYYY-MM-DD) in UTC+8
 const todayLocal = () => new Date(Date.now() + 8 * 60 * 60 * 1000).toISOString().slice(0, 10);
 
 app.set('trust proxy', 1);
@@ -537,8 +533,6 @@ app.get('/api/users', requireLogin, requireOwner, async (req, res) => {
     res.json({ users, logs });
 });
 
-
-// JSON error handler for unexpected route/database errors.
 app.use((error, req, res, next) => {
     console.error('API error:', error);
     if (res.headersSent) return next(error);
