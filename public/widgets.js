@@ -128,4 +128,24 @@ const ITEM_CATEGORIES = {
   ['reservationRows', 'saleRows'].forEach(id => observer.observe(document.getElementById(id), { childList: true }));
   document.querySelectorAll('.nav-button').forEach(b => b.addEventListener('click', later));
   later();
+  
+})();
+
+// ---- Show booking times in 12-hour format ----
+(function () {
+  const rows = document.getElementById('reservationRows');
+  function to12Hour() {
+    rows.querySelectorAll('tr > td:nth-child(2)').forEach(cell => {
+      const walker = document.createTreeWalker(cell, NodeFilter.SHOW_TEXT);
+      let node;
+      while ((node = walker.nextNode())) {
+        const text = node.nodeValue.replace(
+          /\b([01]?\d|2[0-3]):([0-5]\d)(?::\d\d)?\b(?!\s*[AP]M)/g,
+          (match, h, m) => `${h % 12 || 12}:${m} ${h < 12 ? 'AM' : 'PM'}`);
+        if (text !== node.nodeValue) node.nodeValue = text;
+      }
+    });
+  }
+  new MutationObserver(to12Hour).observe(rows, { childList: true });
+  to12Hour();
 })();
