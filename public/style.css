@@ -1,17 +1,21 @@
-@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800&family=Lora:wght@600;700&display=swap');
+
 :root {
-  --navy: #172b4d;
-  --navy2: #203b65;
-  --blue: #3867d6;
-  --bg: #f5f7fb;
-  --text: #202b3c;
-  --muted: #7b8798;
-  --line: #e8edf4;
+  --navy: #1f3d2b;      
+  --navy2: #2f5d3a;     
+  --blue: #3a7a3c;      
+  --bg: #f6f1e4;        
+  --text: #2b2a26;
+  --muted: #7a7566;
+  --line: #e6dec9;
   --white: #fff;
-  --green: #16865b;
-  --red: #c74343;
-  --orange: #bd791b;
-  --shadow: 0 8px 24px rgba(23, 43, 77, 0.05);
+  --green: #2f7a45;
+  --red: #a63a3a;
+  --orange: #b07a2a;
+  --wood: #c89b5e;     
+  --maroon: #6b2a2a;   
+  --card: #fffdf8;      
+  --shadow: 0 8px 24px rgba(60, 45, 20, 0.07);
 }
 
 * {
@@ -60,11 +64,14 @@ button {
   min-height: 100vh;
   display: grid;
   grid-template-columns: 42% 58%;
-  background: #fff;
+  background: var(--card);
 }
 
 .auth-side {
-  background: linear-gradient(145deg, #142744, #244775);
+  background:
+    linear-gradient(rgba(20, 45, 30, 0.86), rgba(31, 61, 43, 0.94)),
+    url('images/cover.jpg') center / cover,
+    #1f3d2b;
   color: #fff;
   padding: 10vh 9%;
   display: flex;
@@ -76,7 +83,7 @@ button {
   height: 48px;
   width: 48px;
   border-radius: 14px;
-  background: #fff;
+  background: #f6f1e4;
   color: var(--navy);
   font-family: Manrope, sans-serif;
   font-weight: 800;
@@ -84,16 +91,24 @@ button {
   place-items: center;
   font-size: 17px;
   margin-bottom: 48px;
+  overflow: hidden;
+}
+
+.brand-mark img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border-radius: inherit;
 }
 
 .auth-side h1 {
-  font: 800 clamp(32px, 4vw, 50px)/1.15 Manrope, sans-serif;
+  font: 700 clamp(32px, 4vw, 50px)/1.15 'Lora', Georgia, serif;
   max-width: 430px;
   margin: 0 0 18px;
 }
 
 .auth-side > p:not(.eyebrow) {
-  color: #cbd6e6;
+  color: #dfe6d2;
   line-height: 1.8;
   max-width: 380px;
 }
@@ -103,7 +118,7 @@ button {
   flex-direction: column;
   gap: 13px;
   margin-top: 40px;
-  color: #dbe7f6;
+  color: #e6ecd9;
 }
 
 .auth-content {
@@ -117,7 +132,8 @@ button {
 }
 
 .auth-card h2 {
-  font: 800 28px Manrope, sans-serif;
+  font: 700 28px 'Lora', Georgia, serif;
+  color: var(--navy);
   margin: 0 0 8px;
 }
 
@@ -135,16 +151,16 @@ button {
 .field label {
   font-size: 12px;
   font-weight: 700;
-  color: #47556a;
+  color: #5b5645;
 }
 
 .field input,
 .field select,
 .search-input {
   height: 43px;
-  border: 1px solid #dfe5ee;
+  border: 1px solid #ddd5bf;
   border-radius: 8px;
-  background: #fff;
+  background: var(--card);
   padding: 0 12px;
   outline: none;
   color: var(--text);
@@ -154,8 +170,8 @@ button {
 .field input:focus,
 .field select:focus,
 .search-input:focus {
-  border-color: #7394e6;
-  box-shadow: 0 0 0 3px rgba(56, 103, 214, 0.1);
+  border-color: #6aa05a;
+  box-shadow: 0 0 0 3px rgba(58, 122, 60, 0.15);
 }
 
 .small-note {
@@ -180,12 +196,12 @@ button {
 }
 
 .primary-button:hover {
-  background: #2d57bd;
+  background: #2b5f2f;
 }
 
 .light-button {
-  background: #eef2f8;
-  color: #536176;
+  background: #efe8d3;
+  color: #6b6450;
 }
 
 .full-button {
@@ -217,13 +233,14 @@ button {
   color: var(--green);
 }
 
+/* ---------- App shell / Sidebar ---------- */
 .app-shell {
   min-height: 100vh;
 }
 
 .sidebar {
   width: 244px;
-  background: var(--navy);
+  background: linear-gradient(180deg, #1f3d2b, #163021);
   color: #fff;
   position: fixed;
   inset: 0 auto 0 0;
@@ -245,19 +262,19 @@ button {
   width: 38px;
   border-radius: 11px;
   margin: 0;
-  background: #eaf0ff;
+  background: #f3ead2;
   color: var(--navy);
   font-size: 13px;
 }
 
 .sidebar-brand strong {
   display: block;
-  font: 700 15px Manrope, sans-serif;
+  font: 700 15px 'Lora', Georgia, serif;
 }
 
 .sidebar-brand span {
   display: block;
-  color: #9eacc1;
+  color: #b9c7ab;
   font-size: 11px;
   margin-top: 3px;
 }
@@ -265,7 +282,7 @@ button {
 .nav-heading {
   font-size: 10px;
   letter-spacing: 1.5px;
-  color: #8293ac;
+  color: #9bb08d;
   font-weight: 700;
   padding: 0 12px;
   margin: 0 0 10px;
@@ -280,7 +297,7 @@ button {
 .nav-button {
   border: 0;
   background: transparent;
-  color: #b9c5d7;
+  color: #d6dcc6;
   text-align: left;
   padding: 12px 13px;
   border-radius: 8px;
@@ -298,8 +315,12 @@ button {
 
 .nav-button:hover,
 .nav-button.active {
-  background: #2b4770;
+  background: var(--navy2);
   color: #fff;
+}
+
+.nav-button.active {
+  box-shadow: inset 3px 0 0 var(--wood);
 }
 
 .sidebar-bottom {
@@ -307,7 +328,7 @@ button {
 }
 
 .help-box {
-  background: #203a61;
+  background: #2a4d36;
   border-radius: 10px;
   padding: 14px;
   margin: 0 2px 18px;
@@ -319,7 +340,7 @@ button {
 
 .help-box p {
   font-size: 11px;
-  color: #afbdd0;
+  color: #c9d2bd;
   line-height: 1.5;
   margin: 7px 0 0;
 }
@@ -328,12 +349,13 @@ button {
   width: 100%;
   padding: 12px;
   border: 0;
-  border-top: 1px solid #314866;
+  border-top: 1px solid #3d5c47;
   background: none;
-  color: #c7d2e2;
+  color: #e3e6d4;
   text-align: left;
 }
 
+/* ---------- Main area / Topbar ---------- */
 .main-area {
   margin-left: 244px;
   padding: 0 34px 24px;
@@ -354,7 +376,8 @@ button {
 }
 
 .topbar h1 {
-  font: 800 22px Manrope, sans-serif;
+  font: 700 22px 'Lora', Georgia, serif;
+  color: var(--navy);
   margin: 0;
 }
 
@@ -385,8 +408,8 @@ button {
   border-radius: 50%;
   display: grid;
   place-items: center;
-  background: #e6edff;
-  color: var(--blue);
+  background: #e8efd8;
+  color: var(--navy2);
   font-weight: 700;
 }
 
@@ -404,19 +427,21 @@ button {
 
 .welcome-row h2,
 .section-intro h2 {
-  font: 800 20px Manrope, sans-serif;
+  font: 700 20px 'Lora', Georgia, serif;
+  color: var(--navy);
   margin: 0;
 }
 
 .today-label {
   font-size: 11px;
   color: var(--muted);
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
   padding: 9px 12px;
   border-radius: 8px;
 }
 
+/* ---------- Stat cards ---------- */
 .stats-grid {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -426,9 +451,9 @@ button {
 
 .stat-card,
 .content-card {
-  background: #fff;
+  background: var(--card);
   border: 1px solid var(--line);
-  border-radius: 11px;
+  border-radius: 14px;
   box-shadow: var(--shadow);
 }
 
@@ -448,23 +473,23 @@ button {
 }
 
 .purple {
-  background: #f0eaff;
-  color: #7855c9;
+  background: #f3e4e2;
+  color: var(--maroon);
 }
 
 .green {
-  background: #e4f7ef;
-  color: #16865b;
+  background: #e4f1e0;
+  color: #2f7a45;
 }
 
 .blue {
-  background: #e8efff;
-  color: #3867d6;
+  background: #e8f0dc;
+  color: #3a7a3c;
 }
 
 .orange {
-  background: #fff2df;
-  color: #bd791b;
+  background: #fbefd6;
+  color: #b07a2a;
 }
 
 .stat-card p {
@@ -475,12 +500,13 @@ button {
 
 .stat-card h3 {
   font: 800 25px Manrope, sans-serif;
+  color: var(--navy);
   margin: 0;
 }
 
 .stat-foot {
   font-size: 10px;
-  color: #9aa4b2;
+  color: #a39d8b;
   display: block;
   margin-top: 7px;
 }
@@ -499,7 +525,8 @@ button {
 }
 
 .card-heading h3 {
-  font: 700 14px Manrope, sans-serif;
+  font: 700 14px 'Lora', Georgia, serif;
+  color: var(--navy);
   margin: 0;
 }
 
@@ -515,8 +542,8 @@ button {
 
 .activity-list li {
   padding: 12px 0;
-  border-top: 1px solid #f0f2f6;
-  color: #59677b;
+  border-top: 1px solid #efe8d5;
+  color: #5b5645;
   font-size: 12px;
 }
 
@@ -525,10 +552,11 @@ button {
 }
 
 .activity-list time {
-  color: #9aa4b2;
+  color: #a39d8b;
   margin-left: 8px;
 }
 
+/* ---------- Forms ---------- */
 .form-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -551,6 +579,7 @@ button {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+/* ---------- Tables ---------- */
 .table-wrap {
   width: 100%;
   overflow-x: auto;
@@ -564,23 +593,23 @@ table {
 
 th {
   text-align: left;
-  color: #8591a1;
+  color: #8a8470;
   font-size: 10px;
   letter-spacing: 0.4px;
   text-transform: uppercase;
   font-weight: 700;
-  background: #fafbfd;
+  background: #faf6ea;
 }
 
 td,
 th {
   padding: 13px 12px;
-  border-bottom: 1px solid #edf0f5;
+  border-bottom: 1px solid #eee6d1;
 }
 
 td {
   font-size: 12px;
-  color: #4b586b;
+  color: #4d4a3e;
 }
 
 tbody tr:last-child td {
@@ -609,18 +638,18 @@ tbody tr:last-child td {
 }
 
 .status.good {
-  background: #e5f6ed;
-  color: #188154;
+  background: #e4f1e0;
+  color: #2f7a45;
 }
 
 .status.warn {
-  background: #fff2df;
-  color: #a66a13;
+  background: #fbefd6;
+  color: #94600f;
 }
 
 .status.bad {
-  background: #ffebeb;
-  color: #c04444;
+  background: #f6e1df;
+  color: #a63a3a;
 }
 
 .search-input {
@@ -629,6 +658,7 @@ tbody tr:last-child td {
   font-size: 11px;
 }
 
+/* ---------- Reports ---------- */
 .report-filter {
   display: flex;
   align-items: end;
@@ -655,7 +685,7 @@ tbody tr:last-child td {
 
 .footer-note {
   text-align: center;
-  color: #a0a9b6;
+  color: #a39d8b;
   font-size: 10px;
   padding: 15px;
 }
@@ -674,7 +704,7 @@ tbody tr:last-child td {
 
 .empty-row {
   text-align: center;
-  color: #9aa4b2;
+  color: #a39d8b;
   padding: 24px;
 }
 
@@ -682,6 +712,7 @@ tbody tr:last-child td {
   margin-bottom: 18px;
 }
 
+/* ---------- Responsive ---------- */
 @media (max-width: 1050px) {
   .sidebar {
     width: 210px;
@@ -810,6 +841,7 @@ tbody tr:last-child td {
 
 }
 
+/* ---------- Vegetable inventory alerts ---------- */
 .veg-alerts {
   display: grid;
   gap: 8px;
@@ -819,25 +851,25 @@ tbody tr:last-child td {
 .veg-alert {
   padding: 11px 14px;
   border-radius: 8px;
-  background: #fff2df;
+  background: #fbefd6;
   color: #94600f;
-  border: 1px solid #f3dfbd;
+  border: 1px solid #efd9a8;
   font-size: 12px;
 }
 
 .veg-alert.expired {
-  background: #ffebeb;
-  color: #b23b3b;
-  border-color: #f2caca;
+  background: #f6e1df;
+  color: #a63a3a;
+  border-color: #e8c0bc;
 }
 
 .veg-alert.ok {
-  background: #e5f6ed;
-  color: #188154;
-  border-color: #ccebd9;
+  background: #e4f1e0;
+  color: #2f7a45;
+  border-color: #c5e0bd;
 }
 
 .veg-unit {
-  color: #7b8798;
+  color: #7a7566;
   font-size: 11px;
 }
