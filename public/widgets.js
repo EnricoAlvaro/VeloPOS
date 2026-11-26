@@ -1,6 +1,7 @@
 // Dashboard charts + reservation calendar (plain JavaScript, no libraries)
 // EDIT THIS: put each item you sell under a category (use lowercase names)
 const ITEM_CATEGORIES = {
+  'item name in lowercase': 'Drinks',
   'your drink name': 'Drinks',
   'your food name': 'Food',
   'your snack name': 'Snacks'
