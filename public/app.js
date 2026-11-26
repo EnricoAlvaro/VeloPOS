@@ -1,4 +1,3 @@
-// Frontend JavaScript. Functions are kept small so they are easier to follow.
 let currentUser = null;
 let authMode = 'signup';
 let editingReservationId = null;
