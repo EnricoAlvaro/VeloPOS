@@ -102,22 +102,27 @@ button {
 }
 
 .auth-side h1 {
-  font: 700 clamp(32px, 4vw, 50px)/1.15 'Lora', Georgia, serif;
-  max-width: 430px;
+  font: 700 clamp(26px, 2.8vw, 40px)/1.2 'Lora', Georgia, serif;
+  max-width: 100%;
   margin: 0 0 18px;
+  text-align: left;
+  text-wrap: balance;
 }
 
 .auth-side > p:not(.eyebrow) {
   color: #dfe6d2;
-  line-height: 1.8;
-  max-width: 380px;
+  font-size: 14px;
+  line-height: 1.7;
+  max-width: 100%;
+  text-align: left;
 }
 
 .auth-points {
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   gap: 13px;
-  margin-top: 40px;
+  margin-top: 32px;
   color: #e6ecd9;
 }
 
