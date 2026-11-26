@@ -1,4 +1,11 @@
 // Dashboard charts + reservation calendar (plain JavaScript, no libraries)
+// EDIT THIS: put each item you sell under a category (use lowercase names)
+const ITEM_CATEGORIES = {
+  'latte': 'Drinks', 'americano': 'Drinks', 'iced coffee': 'Drinks',
+  'rice meal': 'Food', 'pasta': 'Food',
+  'fries': 'Snacks', 'nachos': 'Snacks'
+};
+
 (function () {
   const css = `
   .vw-row{display:flex;flex-wrap:wrap;gap:20px;margin:20px 0}
@@ -9,7 +16,8 @@
   .vw-bar{width:70%;max-width:44px;border-radius:6px 6px 2px 2px;background:linear-gradient(#ee9f00,#f07000);margin-bottom:6px}
   .vw-cat{display:grid;grid-template-columns:90px 1fr 80px;gap:10px;align-items:center;margin:10px 0;font-size:12px}
   .vw-track{background:#f1f3f8;border-radius:6px;height:24px}
-  .vw-fill{height:100%;border-radius:6px}
+  .vw-fill{height:100%;min-width:34px;border-radius:6px;color:#fff;font-size:10px;font-weight:700;line-height:24px;padding-left:9px;box-sizing:border-box}
+  .vw-name{text-align:right}
   .vw-right{text-align:right;font-weight:700}
   .vw-cal{background:#000;color:#eee;border-color:#2a2a2a}
   .vw-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
@@ -41,14 +49,14 @@
     const cats = {};
     week.forEach(s => { const c = s.category || 'Other'; cats[c] = (cats[c] || 0) + Number(s.total); });
     const sum = Object.values(cats).reduce((a, b) => a + b, 0);
-    const colors = ['#f08c00', '#4f6bf0', '#36b04b', '#a04cf0', '#74849b'];
+    const colors = ['#eea000,#f07000', '#3466ee,#6866f5', '#34a34a,#48c45a', '#9238ee,#bd85fb', '#68778c,#9aa6b8'];
 
     el.innerHTML = `<div class="vw-row">
       <div class="vw-card"><h3>Weekly Sales</h3><div class="vw-bars">${days.map((d, i) =>
         `<div class="vw-col" title="${peso(totals[i])}"><div class="vw-bar" style="height:${totals[i] / max * 85}%"></div>${d.toLocaleDateString('en-US', { weekday: 'short' })}</div>`).join('')}</div></div>
-      <div class="vw-card"><h3>Top 5 Items (this week)</h3>${Object.entries(cats).sort((a, b) => b[1] - a[1]).slice(0, 5).map(([name, v], i) => {
+      <div class="vw-card"><h3>Sales by Category (this week)</h3>${Object.entries(cats).sort((a, b) => b[1] - a[1]).map(([name, v], i) => {
         const pct = sum ? Math.round(v / sum * 100) : 0;
-        return `<div class="vw-cat"><span>${esc(name)} ${pct}%</span><div class="vw-track"><div class="vw-fill" style="width:${pct}%;background:${colors[i % 5]}"></div></div><span class="vw-right">${peso(v)}</span></div>`;
+        return `<div class="vw-cat"><span class="vw-name">${esc(name)}</span><div class="vw-track"><div class="vw-fill" style="width:${pct}%;background:linear-gradient(90deg,${colors[i % 5]})">${pct}%</div></div><span class="vw-right">${peso(v)}</span></div>`;
       }).join('') || '<p>No sales yet.</p>'}</div></div>`;
   };
 
@@ -101,7 +109,7 @@
     try {
       const [sales, bookings] = await Promise.all([get('/api/sales'), get('/api/reservations')]);
       renderSalesCharts(document.getElementById('salesCharts'),
-        sales.map(s => ({ date: s.created_at.replace(' ', 'T'), category: s.item_name, total: s.total_amount })));
+        sales.map(s => ({ date: s.created_at.replace(' ', 'T'), category: ITEM_CATEGORIES[s.item_name.trim().toLowerCase()] || 'Other', total: s.total_amount })));
       const cal = document.getElementById('bookingCalendar');
       renderCalendar(cal,
         bookings.map(b => ({ date: String(b.booking_date).slice(0, 10), payment: b.payment_status, status: b.status })),
